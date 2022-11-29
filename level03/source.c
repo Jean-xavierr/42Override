@@ -3,18 +3,29 @@
 
 void    decrypt(int nb)
 {
-    char *str;
+    int     index;
+    long    len;
+    char    *str;
     
-    if (strncmp("Congratulations", str, 17)) {
+    char *str = (char *)(int [4]){ 0x757c7d51, 0x67667360, 0x7b66737e, 0x33617c7d };
+
+    len = strlen((char *)str);
+    while (0 < len) {
+        str += index;
+        str += index;
+        index += 1;
+    }
+    if (strncmp("Congratulations", str, 17) == 0) {
         system("/bin/sh");
     } else {
         puts("\nInvalid Password");
     }
+    return ;
 }
 
-int     test(int format, int arg_ch)
+int     test(int password, int arg_ch)
 {
-    int nb = arg_ch - format;
+    unsigned long nb = arg_ch - password;
 
     if (nb <= 21)
     {
@@ -22,23 +33,23 @@ int     test(int format, int arg_ch)
         nb += 0x80489f0;
         nb = *(nb);
         void (*nb)();
+        return 0;
     }
-    nb = rand();
-    decrypt(nb);
+    decrypt(rand());
     return nb;
 }
 
 
 int     main(void)
 {
-    char    *format;
+    int password;
 
     srand(time(0));
     puts("***********************************");
     puts("*               level03         **");
     puts("***********************************");
     printf("Password:");
-    scanf(format,100);
-    test(format, 100);
+    scanf("%d", &password);
+    test(password, 0x1337d00d);
     return 0;
 }
